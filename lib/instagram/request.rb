@@ -41,6 +41,7 @@ module Instagram
           request.headers["X-Insta-Forwarded-For"] = get_insta_fowarded_for(client_ips, client_secret)
         end
       end
+      Rails.logger.info "requests left: #{response.headers['x-ratelimit-remaining']}"
       return response if raw
       return response.body if no_response_wrapper
       return Response.create( response.body )
